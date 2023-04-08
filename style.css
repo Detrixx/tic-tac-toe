@@ -2,8 +2,10 @@
 float: inline-start;
 }
 .board{
-  
+
 }
-.sloupec0{
-    display: block;
-}
+[class^=radek]{
+    border: 1px solid black ;
+   
+
+    }

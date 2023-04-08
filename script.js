@@ -1,8 +1,9 @@
 let pole = [];
 let objekt;
 let bunkaRadku;
+let hracNaTahu=true;
 const board = document.querySelector(".board");
-const pocetSloupcu=5, pocetRadku=5;
+const pocetSloupcu=6, pocetRadku=6;
 
 //vytvoreni pole
 for(let x=0;x<pocetSloupcu;x++){
@@ -21,26 +22,18 @@ for(let x=0;x<pocetSloupcu;x++){
         bunka.textContent = pole[x][y];
     }
 }
+//kliknutí na board
 board.onclick = e => {
-    console.log(e.target);  // to get the element
-    console.log(e.target.parentElement);
-    if(e.target.parentElement == "sloupec3"){
-        console.log("tady");
-
+    let kliknutaBunkaSloupec = document.querySelector('.'+e.target.parentElement.className);
+    let kliknutaBunka = kliknutaBunkaSloupec.querySelector('.'+e.target.className);
+    if(kliknutaBunka.textContent=="O"){
+    if(hracNaTahu){
+    kliknutaBunka.innerHTML = "X";
+    hracNaTahu=false;
     }
-
+    else{
+        kliknutaBunka.innerHTML = "T";
+        hracNaTahu=true;
+    }
+}
 } 
-
-zacatekHry();
-
-function zacatekHry(){
-
-    
-        
-}
-function kliknutiNaBunku(){
-
-}
-
-
-console.log(pole);
