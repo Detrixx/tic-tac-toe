@@ -2,6 +2,7 @@ let pole = [];
 let objekt;
 const bunka = document.querySelectorAll(".sloupec");
 
+//vytvoreni pole
 for(let x=0;x<5;x++){
     pole[x]=[];
     for(let y=0;y<5;y++){
