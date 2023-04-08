@@ -1,23 +1,41 @@
 let pole = [];
 let objekt;
-const bunka = document.querySelectorAll(".sloupec");
+let bunkaRadku;
+const board = document.querySelector(".board");
+const pocetSloupcu=5, pocetRadku=5;
 
 //vytvoreni pole
-//
-for(let x=0;x<5;x++){
+for(let x=0;x<pocetSloupcu;x++){
     pole[x]=[];
-    for(let y=0;y<5;y++){
+    //vytvoří DIV pod board
+        bunkaRadku = document.createElement("div");
+        bunkaRadku.classList.add("sloupec"+x);
+        board.appendChild(bunkaRadku);
+    for(let y=0;y<pocetRadku;y++){ 
+    //vytvoří DIV pod bunkaRadku
+        let bunka = document.createElement("div");
+        bunka.classList.add("radek"+y);
+        bunkaRadku.appendChild(bunka);
+    //vloží na pozice X a Y string
         pole[x][y]= ["O"];
-        let bunkaSloupce = document.getElementsByClassName('radek'+x)[0];
-        let bunka = bunkaSloupce.querySelector(".sloupec"+y);
         bunka.textContent = pole[x][y];
     }
 }
+board.onclick = e => {
+    console.log(e.target);  // to get the element
+    console.log(e.target.parentElement);
+    if(e.target.parentElement == "sloupec3"){
+        console.log("tady");
+
+    }
+
+} 
+
 zacatekHry();
 
 function zacatekHry(){
 
-    bunka.forEach(bunka => bunka.addEventListener("click"),kliknutiNaBunku());
+    
         
 }
 function kliknutiNaBunku(){

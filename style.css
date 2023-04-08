@@ -1,9 +1,8 @@
-[class^=radek]{
+[class^=sloupec]{
 float: inline-start;
 }
 .board{
-    width: 100px;
-    height: 100px;
+  
 }
 .sloupec0{
     display: block;
