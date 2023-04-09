@@ -1,11 +1,23 @@
-[class^=sloupec]{
-float: inline-start;
-}
-.board{
+body {
+    display: flex;
+    justify-content: center;
 
 }
-[class^=radek]{
-    border: 1px solid black ;
-   
 
-    }
+[class^=sloupec] {
+    float: inline-start;
+}
+
+.board {
+    border: 2px solid black;
+}
+
+[class^=radek] {
+    border: 2px solid black;
+    width: 90px;
+    height: 90px;
+    font-size: 90px;
+    text-align: center;
+
+
+}
