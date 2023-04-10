@@ -3,7 +3,7 @@ let objekt;
 let bunkaRadku;
 let hracNaTahu = true;
 const board = document.querySelector(".board");
-const pocetSloupcu = 6, pocetRadku = 6;
+const pocetSloupcu = 8, pocetRadku = 8;
 let _x, _y;
 
 //vytvoreni pole
@@ -23,6 +23,7 @@ for (let x = 0; x < pocetSloupcu; x++) {
         bunka.textContent = pole[x][y];
     }
 }
+
 //kliknutí na board
 board.onclick = e => {
     let kliknutaBunkaSloupec = document.querySelector('.' + e.target.parentElement.className);
@@ -47,11 +48,50 @@ board.onclick = e => {
 }
 
 function kontrolaVyhry() {
-    let xTmp=_x, yTmp=_y;
-    let vsechnyMoznosti = false;
     let znak = pole[_x][_y];
-    console.log(znak);
-    console.log(pole);
-    console.log(find("X",pole));
+    let vyhra = false;
+   
+    pole.forEach((element, poziceSloupce) => {
+        element.forEach((element, poziceRadku) => {
+            //console.log(`pozice ${element} je ${poziceSloupce},${poziceRadku}`);
+            if(element=="X"){
+                let tmp=1;
+                //dokud výhra nebude true nebo cyklus nebreakne bude zkoušet na diagonále zda není další X 
+                while(!vyhra){
+                if(pole[poziceSloupce+tmp][poziceRadku+tmp]=="X"){
+                    tmp++;
+                    console.log("dalši X"+ tmp);
+                }
+                else{
+                    break;
+                }
+                //TODO Výhra na řádku (poziceSloupce se nemění jen radek + 1), na sloupci (poziceSloupce +1 radek nemeni), diagonála do leva (poziceSloupce -1 a poziceRadku-1) !
+
+                //jestli našlo daný počet X výhra = True
+                if(tmp==5){
+                    alert("vyhra pro X");
+                    vyhra=true;
+                }
+                 }
+            }
+            else if(element=="O"){
+                let tmp=1;
+                while(!vyhra){
+                if(pole[poziceSloupce+tmp][poziceRadku+tmp]=="O"){
+                    tmp++;
+                    console.log("dalši O"+ tmp);
+                }
+                else{
+                    break;
+                }
+                if(tmp==5){
+                    alert("vyhra pro O");
+                    vyhra=true;
+                }
+                 }
+              
+            }
+        });
+    });
 
 }
