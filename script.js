@@ -3,8 +3,9 @@ let objekt;
 let bunkaRadku;
 let hracNaTahu = true;
 const board = document.querySelector(".board");
-const pocetSloupcu = 8, pocetRadku = 8;
+const pocetSloupcu = 10, pocetRadku = 10;
 let _x, _y;
+let vyhra = false;
 
 //vytvoreni pole
 for (let x = 0; x < pocetSloupcu; x++) {
@@ -47,51 +48,57 @@ board.onclick = e => {
     }
 }
 
+
+
 function kontrolaVyhry() {
     let znak = pole[_x][_y];
-    let vyhra = false;
+    let kolikratX=1;
+    let kolikratO=1;
+    //let vyhra = false;
    
     pole.forEach((element, poziceSloupce) => {
         element.forEach((element, poziceRadku) => {
             //console.log(`pozice ${element} je ${poziceSloupce},${poziceRadku}`);
             if(element=="X"){
-                let tmp=1;
-                //dokud výhra nebude true nebo cyklus nebreakne bude zkoušet na diagonále zda není další X 
-                while(!vyhra){
-                if(pole[poziceSloupce+tmp][poziceRadku+tmp]=="X"){
-                    tmp++;
-                    console.log("dalši X"+ tmp);
-                }
-                else{
-                    break;
-                }
-                //TODO Výhra na řádku (poziceSloupce se nemění jen radek + 1), na sloupci (poziceSloupce +1 radek nemeni), diagonála do leva (poziceSloupce -1 a poziceRadku-1) !
+                
+                kontrolaOkolnichBunek(poziceSloupce,poziceRadku,znak,kolikratX);
 
-                //jestli našlo daný počet X výhra = True
-                if(tmp==5){
-                    alert("vyhra pro X");
-                    vyhra=true;
-                }
-                 }
             }
             else if(element=="O"){
-                let tmp=1;
-                while(!vyhra){
-                if(pole[poziceSloupce+tmp][poziceRadku+tmp]=="O"){
-                    tmp++;
-                    console.log("dalši O"+ tmp);
-                }
-                else{
-                    break;
-                }
-                if(tmp==5){
-                    alert("vyhra pro O");
-                    vyhra=true;
-                }
-                 }
+                
+                kontrolaOkolnichBunek(poziceSloupce,poziceRadku,znak,kolikratO);
+                
               
             }
         });
     });
+}
 
+
+function kontrolaOkolnichBunek(_poziceSloupce,_poziceRadku,_znak,_kolikrat){
+    
+    while(!vyhra){
+        console.log(_znak);
+        //diagonála do prava dolů +1 +1
+        if(pole[_poziceSloupce+_kolikrat][_poziceRadku+_kolikrat]==_znak){
+            _kolikrat++;
+            console.log("dalši "+ _znak+ _kolikrat);
+        }
+        //diagonála do leva dolů -1 -1
+        //NEFUNGUJE !!!!!!!!!!
+        else if(pole[_poziceSloupce-_kolikrat][_poziceRadku-_kolikrat]==_znak){
+            
+        }
+        else{
+            break;
+        }
+        //TODO Výhra na řádku (poziceSloupce se nemění jen radek + 1), na sloupci (poziceSloupce +1 radek nemeni), diagonála do leva (poziceSloupce -1 a poziceRadku-1) !
+
+
+        //jestli našlo daný počet Znaků výhra = True
+        if(_kolikrat>=5){
+            alert("vyhra pro "+_znak);
+            vyhra=true;
+        }
+         }
 }
