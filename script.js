@@ -75,6 +75,7 @@ function kontrolaVyhry() {
 }
 
 
+
 function kontrolaOkolnichBunek(_poziceSloupce,_poziceRadku,_znak,_kolikrat){
     
     while(!vyhra){
