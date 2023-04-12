@@ -1,9 +1,9 @@
 let pole = [];
-let objekt;
 let bunkaRadku;
 let hracNaTahu = true;
 const board = document.querySelector(".board");
-const pocetSloupcu = 10, pocetRadku = 10;
+const pocetSloupcu = 8, pocetRadku = 8;
+const naKolikVyteznych=5;
 let _x, _y;
 let vyhra = false;
 
@@ -48,58 +48,44 @@ board.onclick = e => {
     }
 }
 
-
-
 function kontrolaVyhry() {
     let znak = pole[_x][_y];
-    let kolikratX=1;
-    let kolikratO=1;
-    //let vyhra = false;
-   
+    let kolikrat=1;
+
     pole.forEach((element, poziceSloupce) => {
         element.forEach((element, poziceRadku) => {
             //console.log(`pozice ${element} je ${poziceSloupce},${poziceRadku}`);
-            if(element=="X"){
-                
-                kontrolaOkolnichBunek(poziceSloupce,poziceRadku,znak,kolikratX);
-
-            }
-            else if(element=="O"){
-                
-                kontrolaOkolnichBunek(poziceSloupce,poziceRadku,znak,kolikratO);
-                
-              
+            if(element==znak){   
+                //diagonála          
+                kontrolaOkolnichBunek(poziceSloupce,poziceRadku,znak,kolikrat,1,1);
+                kontrolaOkolnichBunek(poziceSloupce,poziceRadku,znak,kolikrat,-1,1);
+                //sloupec
+                kontrolaOkolnichBunek(poziceSloupce,poziceRadku,znak,kolikrat,0,1);
+                //řádek
+                kontrolaOkolnichBunek(poziceSloupce,poziceRadku,znak,kolikrat,1,0);
             }
         });
     });
 }
 
-
-
-function kontrolaOkolnichBunek(_poziceSloupce,_poziceRadku,_znak,_kolikrat){
+function kontrolaOkolnichBunek(_poziceSloupce,_poziceRadku,_znak,_kolikrat,smerX,smerY){
     
     while(!vyhra){
         console.log(_znak);
-        //diagonála do prava dolů +1 +1
-        if(pole[_poziceSloupce+_kolikrat][_poziceRadku+_kolikrat]==_znak){
+       if(pole[_poziceSloupce+_kolikrat*smerX][_poziceRadku+_kolikrat*smerY]==_znak){
             _kolikrat++;
             console.log("dalši "+ _znak+ _kolikrat);
-        }
-        //diagonála do leva dolů -1 -1
-        //NEFUNGUJE !!!!!!!!!!
-        else if(pole[_poziceSloupce-_kolikrat][_poziceRadku-_kolikrat]==_znak){
-            
+            console.log(_kolikrat);
         }
         else{
             break;
         }
-        //TODO Výhra na řádku (poziceSloupce se nemění jen radek + 1), na sloupci (poziceSloupce +1 radek nemeni), diagonála do leva (poziceSloupce -1 a poziceRadku-1) !
-
-
         //jestli našlo daný počet Znaků výhra = True
-        if(_kolikrat>=5){
+        if(_kolikrat>=naKolikVyteznych){
             alert("vyhra pro "+_znak);
             vyhra=true;
         }
          }
 }
+
+
