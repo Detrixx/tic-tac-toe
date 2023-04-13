@@ -12,7 +12,7 @@ body {
     border: 2px solid black;
 }
 
-[class^=radek] {
+[class*=radek] {
     border: 2px solid black;
     width: 90px;
     height: 90px;

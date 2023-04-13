@@ -1,10 +1,11 @@
 let pole = [];
+let vyherniPole = [];
 let bunkaRadku;
 let hracNaTahu = true;
 const board = document.querySelector(".board");
 const pocetSloupcu = 8, pocetRadku = 8;
-const naKolikVyteznych=5;
-let _x, _y;
+const naKolikViteznych=5;
+let _x, _y,znak;
 let vyhra = false;
 
 //vytvoreni pole
@@ -44,13 +45,15 @@ board.onclick = e => {
             pole[_x][_y] = "O";
             hracNaTahu = true;
         }
-        kontrolaVyhry()
+        kontrolaVyhry();  
     }
 }
 
 function kontrolaVyhry() {
     let znak = pole[_x][_y];
     let kolikrat=1;
+    vyherniPole = [];
+    console.log(vyherniPole);
 
     pole.forEach((element, poziceSloupce) => {
         element.forEach((element, poziceRadku) => {
@@ -66,24 +69,27 @@ function kontrolaVyhry() {
             }
         });
     });
+    vyherniPole = [];
+    if(vyhra){
+        alert("Vyhra pro "+znak);
+    }
 }
 
 function kontrolaOkolnichBunek(_poziceSloupce,_poziceRadku,_znak,_kolikrat,smerX,smerY){
-    
-    while(!vyhra){
-        console.log(_znak);
+
+    while(_poziceSloupce + _kolikrat * smerX >= 0 && _poziceSloupce + _kolikrat * smerX < pocetSloupcu && _poziceRadku + _kolikrat * smerY >= 0 && _poziceRadku + _kolikrat * smerY < pocetRadku){
        if(pole[_poziceSloupce+_kolikrat*smerX][_poziceRadku+_kolikrat*smerY]==_znak){
             _kolikrat++;
-            console.log("dalši "+ _znak+ _kolikrat);
-            console.log(_kolikrat);
+            vyherniPole.push([_poziceSloupce + _kolikrat * smerX, _poziceRadku + _kolikrat * smerY]);
+            console.log(vyherniPole);
         }
         else{
             break;
         }
         //jestli našlo daný počet Znaků výhra = True
-        if(_kolikrat>=naKolikVyteznych){
-            alert("vyhra pro "+_znak);
+        if(_kolikrat>=naKolikViteznych){    
             vyhra=true;
+            break;
         }
          }
 }
