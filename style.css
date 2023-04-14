@@ -10,6 +10,7 @@ body {
 
 .board {
     border: 2px solid black;
+    
 }
 
 [class*=radek] {
@@ -18,6 +19,8 @@ body {
     height: 90px;
     font-size: 90px;
     text-align: center;
-
-
+}
+button{
+    width: 90px;
+    height: 60px;
 }

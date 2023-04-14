@@ -1,5 +1,4 @@
 let pole = [];
-let vyherniPole = [];
 let bunkaRadku;
 let hracNaTahu = true;
 const board = document.querySelector(".board");
@@ -8,7 +7,10 @@ const naKolikViteznych=5;
 let _x, _y,znak;
 let vyhra = false;
 
+vytvoreniPole();
+
 //vytvoreni pole
+function vytvoreniPole(){
 for (let x = 0; x < pocetSloupcu; x++) {
     pole[x] = [];
     //vytvoří DIV pod board
@@ -25,9 +27,11 @@ for (let x = 0; x < pocetSloupcu; x++) {
         bunka.textContent = pole[x][y];
     }
 }
+}
 
 //kliknutí na board
 board.onclick = e => {
+    if(!vyhra){
     let kliknutaBunkaSloupec = document.querySelector('.' + e.target.parentElement.className);
     let kliknutaBunka = kliknutaBunkaSloupec.querySelector('.' + e.target.className);
     _x = e.target.parentElement.className;
@@ -48,12 +52,11 @@ board.onclick = e => {
         kontrolaVyhry();  
     }
 }
+}
 
 function kontrolaVyhry() {
     let znak = pole[_x][_y];
     let kolikrat=1;
-    vyherniPole = [];
-    console.log(vyherniPole);
 
     pole.forEach((element, poziceSloupce) => {
         element.forEach((element, poziceRadku) => {
@@ -69,7 +72,6 @@ function kontrolaVyhry() {
             }
         });
     });
-    vyherniPole = [];
     if(vyhra){
         alert("Vyhra pro "+znak);
     }
@@ -80,8 +82,6 @@ function kontrolaOkolnichBunek(_poziceSloupce,_poziceRadku,_znak,_kolikrat,smerX
     while(_poziceSloupce + _kolikrat * smerX >= 0 && _poziceSloupce + _kolikrat * smerX < pocetSloupcu && _poziceRadku + _kolikrat * smerY >= 0 && _poziceRadku + _kolikrat * smerY < pocetRadku){
        if(pole[_poziceSloupce+_kolikrat*smerX][_poziceRadku+_kolikrat*smerY]==_znak){
             _kolikrat++;
-            vyherniPole.push([_poziceSloupce + _kolikrat * smerX, _poziceRadku + _kolikrat * smerY]);
-            console.log(vyherniPole);
         }
         else{
             break;
@@ -93,5 +93,3 @@ function kontrolaOkolnichBunek(_poziceSloupce,_poziceRadku,_znak,_kolikrat,smerX
         }
          }
 }
-
-
