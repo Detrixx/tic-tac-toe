@@ -24,3 +24,6 @@ button{
     width: 90px;
     height: 60px;
 }
+[class*=vyhra]{
+    border: 2px solid red;
+}
