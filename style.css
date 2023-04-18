@@ -1,6 +1,8 @@
 body {
     display: flex;
     justify-content: center;
+    margin: 0;
+    padding: 0;
 
 }
 
@@ -10,7 +12,6 @@ body {
 
 .board {
     border: 2px solid black;
-    
 }
 
 [class*=radek] {
@@ -21,9 +22,11 @@ body {
     text-align: center;
 }
 button{
-    width: 90px;
-    height: 60px;
+    position: absolute;
+    height: 50px;
+    width: 100px;
 }
+
 [class*=vyhra]{
     border: 2px solid red;
 }

@@ -8,6 +8,8 @@ let _x, _y, znak;
 let vyhra = false;
 let kolikrat;
 
+const BtReset = document.getElementById("reset");
+
 vytvoreniPole();
 
 //vytvoreni pole
@@ -28,6 +30,8 @@ function vytvoreniPole() {
             bunka.textContent = pole[x][y];
         }
     }
+    let BoardHeight = board.clientHeight + 20;
+    BtReset.style.top = BoardHeight+"px";
 }
 
 //kliknutí na board
@@ -63,13 +67,21 @@ function kontrolaVyhry() {
         element.forEach((element, poziceRadku) => {
             //console.log(`pozice ${element} je ${poziceSloupce},${poziceRadku}`);
             if (element == znak&& kolikrat!=naKolikViteznych) {
-                //diagonála          
+                //diagonála
+                if(!vyhra){          
                 kontrolaOkolnichBunek(poziceSloupce, poziceRadku, znak, kolikrat, 1, 1);
+            }
+            if(!vyhra){  
                 kontrolaOkolnichBunek(poziceSloupce, poziceRadku, znak, kolikrat, -1, 1);
+            }
                 //sloupec
+                if(!vyhra){  
                 kontrolaOkolnichBunek(poziceSloupce, poziceRadku, znak, kolikrat, 0, 1);
+            }
                 //řádek
+                if(!vyhra){  
                 kontrolaOkolnichBunek(poziceSloupce, poziceRadku, znak, kolikrat, 1, 0);
+            }
             }
         });
     });
@@ -80,11 +92,11 @@ function kontrolaVyhry() {
 
 function kontrolaOkolnichBunek(_poziceSloupce, _poziceRadku, _znak, _kolikrat, smerX, smerY) {
     while (_poziceSloupce + _kolikrat * smerX >= 0 && _poziceSloupce + _kolikrat * smerX < pocetSloupcu && _poziceRadku + _kolikrat * smerY >= 0 && _poziceRadku + _kolikrat * smerY < pocetRadku) {
+        if (pole[_poziceSloupce + _kolikrat * smerX][_poziceRadku + _kolikrat * smerY] == _znak) {
+            //Nefunguje pro diagonalu ! ???
             const parent1 = document.querySelector('.sloupec' + (_poziceSloupce));
             const element1 = parent1.querySelector('.radek' + (_poziceRadku));
             element1.classList.add('vyhra');
-        if (pole[_poziceSloupce + _kolikrat * smerX][_poziceRadku + _kolikrat * smerY] == _znak) {
-            //Nefunguje pro diagonalu ! ???
             const parent = document.querySelector('.sloupec' + (_poziceSloupce + _kolikrat * smerX));
             const element = parent.querySelector('.radek' + (_poziceRadku + _kolikrat * smerY));
             console.log(element);
@@ -100,7 +112,6 @@ function kontrolaOkolnichBunek(_poziceSloupce, _poziceRadku, _znak, _kolikrat, s
             for (let i = 0; i < elements.length; i++) {
                 elements[i].classList.remove('vyhra');
             }
-            
             break;
         }
         //jestli našlo daný počet Znaků výhra = True
