@@ -3,6 +3,7 @@ body {
     justify-content: center;
     margin: 0;
     padding: 0;
+    background-color: rgb(105, 99, 99);
 
 }
 
@@ -12,6 +13,9 @@ body {
 
 .board {
     border: 2px solid black;
+}
+.boardHIDE{
+    display: none;
 }
 
 [class*=radek] {
@@ -25,6 +29,10 @@ button{
     position: absolute;
     height: 50px;
     width: 100px;
+}
+
+.Hide{
+    display: none;
 }
 
 [class*=vyhra]{

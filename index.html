@@ -14,6 +14,16 @@
     </div>
     <button id="reset" type="button" onclick="JavaScript: location.reload(true);">Reset</button>
 
+    <div class="menu">
+     <h1>Vyberte kolik řádků</h1>   
+    <input id="range1" type="range" min="2" max="10" value="5" oninput="this.nextElementSibling.value = this.value"/>
+    <output>5</output>
+    <br/>
+    <input id="box1" type="text" />
+    <br/><br>
+    <button onclick="zacatekHry()">Začít hru</button>
+    </div>
+
 </body>
 
 </html>

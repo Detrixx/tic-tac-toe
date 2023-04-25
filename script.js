@@ -2,16 +2,27 @@ let pole = [];
 let bunkaRadku;
 let hracNaTahu = true;
 const board = document.querySelector(".board");
-const pocetSloupcu = 8, pocetRadku = 8;
+let pocetSloupcu , pocetRadku ;
 const naKolikViteznych = 5;
+const menu = document.querySelector(".menu");
 let _x, _y, znak;
 let vyhra = false;
 let kolikrat;
-
 const BtReset = document.getElementById("reset");
 
-vytvoreniPole();
+BtReset.className = "Hide";
+board.className = "Hide";
 
+
+
+function zacatekHry(){
+    pocetSloupcu = document.querySelector("#range1").value, pocetRadku = pocetSloupcu;
+    menu.className = "Hide";
+    BtReset.className = "button";
+    board.className = "board";
+    vytvoreniPole();
+
+}
 //vytvoreni pole
 function vytvoreniPole() {
     for (let x = 0; x < pocetSloupcu; x++) {
@@ -34,6 +45,7 @@ function vytvoreniPole() {
     BtReset.style.top = BoardHeight+"px";
 }
 
+
 //kliknutí na board
 board.onclick = e => {
     if (!vyhra) {
@@ -54,6 +66,7 @@ board.onclick = e => {
                 pole[_x][_y] = "O";
                 hracNaTahu = true;
             }
+
             kontrolaVyhry();
         }
     }
@@ -93,25 +106,10 @@ function kontrolaVyhry() {
 function kontrolaOkolnichBunek(_poziceSloupce, _poziceRadku, _znak, _kolikrat, smerX, smerY) {
     while (_poziceSloupce + _kolikrat * smerX >= 0 && _poziceSloupce + _kolikrat * smerX < pocetSloupcu && _poziceRadku + _kolikrat * smerY >= 0 && _poziceRadku + _kolikrat * smerY < pocetRadku) {
         if (pole[_poziceSloupce + _kolikrat * smerX][_poziceRadku + _kolikrat * smerY] == _znak) {
-            //Nefunguje pro diagonalu ! ???
-            const parent1 = document.querySelector('.sloupec' + (_poziceSloupce));
-            const element1 = parent1.querySelector('.radek' + (_poziceRadku));
-            element1.classList.add('vyhra');
-            const parent = document.querySelector('.sloupec' + (_poziceSloupce + _kolikrat * smerX));
-            const element = parent.querySelector('.radek' + (_poziceRadku + _kolikrat * smerY));
-            console.log(element);
-            element.classList.add('vyhra');
-            console.log(element);
-           
+            pridaniVyhra(_poziceSloupce, _poziceRadku, _znak, _kolikrat, smerX, smerY);
             _kolikrat++;
-
         }
         else {
-            //odstraní všechny classy "vyhra"
-            const elements = document.getElementsByClassName('vyhra');
-            for (let i = 0; i < elements.length; i++) {
-                elements[i].classList.remove('vyhra');
-            }
             break;
         }
         //jestli našlo daný počet Znaků výhra = True
@@ -121,5 +119,26 @@ function kontrolaOkolnichBunek(_poziceSloupce, _poziceRadku, _znak, _kolikrat, s
             break;
             
         }
+    }
+    if(!vyhra){
+        odstraniVyhru();
+    }
+}
+
+//přidá classu "vyhra"
+function pridaniVyhra(_poziceSloupce, _poziceRadku, _znak, _kolikrat, smerX, smerY){
+    const parent1 = document.querySelector('.sloupec' + (_poziceSloupce));
+    const element1 = parent1.querySelector('.radek' + (_poziceRadku));
+    element1.classList.add('vyhra');
+    const parent = document.querySelector('.sloupec' + (_poziceSloupce + _kolikrat * smerX));
+    const element = parent.querySelector('.radek' + (_poziceRadku + _kolikrat * smerY));
+    element.classList.add('vyhra');
+}
+
+//odstraní všechny classy "vyhra"
+function odstraniVyhru(){
+    const elements = document.getElementsByClassName('vyhra');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].classList.remove('vyhra');
     }
 }
