@@ -26,9 +26,12 @@ body {
     text-align: center;
 }
 button{
-    position: absolute;
+    
     height: 50px;
     width: 100px;
+}
+#reset{
+    position: absolute;
 }
 
 .Hide{

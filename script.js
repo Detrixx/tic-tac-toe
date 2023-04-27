@@ -1,6 +1,5 @@
 let pole = [];
 let bunkaRadku;
-let hracNaTahu = true;
 const board = document.querySelector(".board");
 let pocetSloupcu , pocetRadku ;
 const naKolikViteznych = 5;
@@ -8,6 +7,8 @@ const menu = document.querySelector(".menu");
 let _x, _y, znak;
 let vyhra = false;
 let kolikrat;
+let pocetHracu =2;
+let kontrolaPoctuHracu =1;
 const BtReset = document.getElementById("reset");
 
 BtReset.className = "Hide";
@@ -21,6 +22,14 @@ function zacatekHry(){
     BtReset.className = "button";
     board.className = "board";
     vytvoreniPole();
+
+}
+function pridaniHrace(){
+    let hrac = document.createElement("input");
+    pocetHracu++;
+    hrac.className = "hrac"+pocetHracu;
+    hrac.setAttribute("maxlength", "1");
+    menu.appendChild(hrac);
 
 }
 //vytvoreni pole
@@ -55,18 +64,13 @@ board.onclick = e => {
         _y = e.target.className;
         _x = _x.replace('sloupec', '');
         _y = _y.replace('radek', '');
+        //pokud je bunka prázdná tak se vloží znak a zavolá se kontrolaVyhry 
         if (kliknutaBunka.textContent == " ") {
-            if (hracNaTahu) {
-                kliknutaBunka.textContent = "X";
-                pole[_x][_y] = "X";
-                hracNaTahu = false;
-            }
-            else {
-                kliknutaBunka.textContent = "O";
-                pole[_x][_y] = "O";
-                hracNaTahu = true;
-            }
-
+                kliknutaBunka.textContent = document.querySelector('.hrac'+kontrolaPoctuHracu).value.toUpperCase();
+                console.log(document.querySelector('.hrac'+kontrolaPoctuHracu).value.toUpperCase());
+                pole[_x][_y] = document.querySelector('.hrac'+kontrolaPoctuHracu).value.toUpperCase();
+                if(kontrolaPoctuHracu===pocetHracu){kontrolaPoctuHracu=1;}
+                else{kontrolaPoctuHracu++;}
             kontrolaVyhry();
         }
     }
