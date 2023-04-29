@@ -2,8 +2,9 @@ let pole = [];
 let bunkaRadku;
 const board = document.querySelector(".board");
 let pocetSloupcu , pocetRadku ;
-const naKolikViteznych = 5;
+let naKolikViteznych;
 const menu = document.querySelector(".menu");
+const inputy = document.querySelector(".inputy");
 let _x, _y, znak;
 let vyhra = false;
 let kolikrat;
@@ -15,9 +16,9 @@ BtReset.className = "Hide";
 board.className = "Hide";
 
 
-
 function zacatekHry(){
     pocetSloupcu = document.querySelector("#range1").value, pocetRadku = pocetSloupcu;
+    naKolikViteznych = document.querySelector("#range2").value;
     menu.className = "Hide";
     BtReset.className = "button";
     board.className = "board";
@@ -26,11 +27,25 @@ function zacatekHry(){
 }
 function pridaniHrace(){
     let hrac = document.createElement("input");
+    let brElement = document.createElement("br");
+    let brElement1 = document.createElement("br");
     pocetHracu++;
     hrac.className = "hrac"+pocetHracu;
     hrac.setAttribute("maxlength", "1");
-    menu.appendChild(hrac);
-
+    inputy.appendChild(brElement);
+    inputy.appendChild(brElement1);
+    inputy.appendChild(hrac);
+}
+function kontrolaPridaniHrace(){
+    for(let i=1;i<=pocetHracu;i++){
+        let hrac = document.querySelector(".hrac"+i);
+        if(hrac.value===""){
+            alert("Vyplňte znak pro všechny hráče");
+            return false;
+        }
+    }
+    zacatekHry();
+    return true;
 }
 //vytvoreni pole
 function vytvoreniPole() {
@@ -60,15 +75,15 @@ board.onclick = e => {
     if (!vyhra) {
         let kliknutaBunkaSloupec = document.querySelector('.' + e.target.parentElement.className);
         let kliknutaBunka = kliknutaBunkaSloupec.querySelector('.' + e.target.className);
+        let kliknutyZnak = document.querySelector('.hrac'+kontrolaPoctuHracu).value.toUpperCase();
         _x = e.target.parentElement.className;
         _y = e.target.className;
         _x = _x.replace('sloupec', '');
         _y = _y.replace('radek', '');
-        //pokud je bunka prázdná tak se vloží znak a zavolá se kontrolaVyhry 
+        //pokud je bunka prázdná tak se vloží znak a zavolá se kontrolaVyhry
         if (kliknutaBunka.textContent == " ") {
-                kliknutaBunka.textContent = document.querySelector('.hrac'+kontrolaPoctuHracu).value.toUpperCase();
-                console.log(document.querySelector('.hrac'+kontrolaPoctuHracu).value.toUpperCase());
-                pole[_x][_y] = document.querySelector('.hrac'+kontrolaPoctuHracu).value.toUpperCase();
+                kliknutaBunka.textContent = kliknutyZnak;
+                pole[_x][_y] = kliknutyZnak;
                 if(kontrolaPoctuHracu===pocetHracu){kontrolaPoctuHracu=1;}
                 else{kontrolaPoctuHracu++;}
             kontrolaVyhry();
