@@ -15,22 +15,22 @@
     <button id="reset" type="button" onclick="JavaScript: location.reload(true);">Reset</button>
 
     <div class="menu">
-     <h1>Vyberte počet buněk</h1>   
+     <h1>Select the number of cells</h1>   
     <input id="range1" type="range" min="3" max="20" value="8" oninput="this.nextElementSibling.value = this.value"/>
     <output>8</output>
     <br/>
-    <h1>Vyberte na kolik vítězných</h1> 
+    <h1>Select how many in a row to win</h1> 
     <input id="range2" type="range" min="3" max="10" value="5" oninput="this.nextElementSibling.value = this.value"/>
     <output>5</output>
     <br/>
-    <h1>Zvolte znak pro hráče</h1>
+    <h1>Select a symbol for the player</h1>
     <div class="inputy">
     <input class="hrac1" type="text" value="X" maxlength="1" /> <br/> <br/>
     <input class="hrac2" type="text" value="O" maxlength="1" />
     </div>
     <br/><br>
-    <button onclick="kontrolaPridaniHrace()">Začít hru</button>
-    <button onclick="pridaniHrace()">Přidat hráče</button>
+    <button onclick="kontrolaPridaniHrace()">Start Game</button>
+    <button onclick="pridaniHrace()">Add Player</button>
     </div>
  
 </body>
