@@ -40,7 +40,7 @@ function kontrolaPridaniHrace(){
     for(let i=1;i<=pocetHracu;i++){
         let hrac = document.querySelector(".hrac"+i);
         if(hrac.value===""){
-            alert("Vyplňte znak pro všechny hráče");
+            alert("Fill in symbols for all players.");
             return false;
         }
     }
@@ -118,7 +118,7 @@ function kontrolaVyhry() {
         });
     });
     if (vyhra) {
-        alert("Vyhra pro " + znak);
+        alert(znak+" won!");
     }
 }
 
