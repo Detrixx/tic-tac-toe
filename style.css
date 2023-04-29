@@ -8,11 +8,12 @@ body {
 }
 
 [class^=sloupec] {
-    float: inline-start;
+    display: flex;
 }
 
 .board {
     border: 2px solid black;
+    user-select: none;
 }
 .boardHIDE{
     display: none;
@@ -26,8 +27,8 @@ body {
     text-align: center;
 }
 button{
-    height: 50px;
-    width: 100px;
+    height: 60px;
+    width: 110px;
     font-size: 16px;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
