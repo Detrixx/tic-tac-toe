@@ -1,38 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Tic-Tac-Toe</title>
     <script defer src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <div class="board">
-    </div>
-    <button id="reset" type="button" onclick="JavaScript: location.reload(true);">Restart</button>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="board"></div>
+    <button
+      id="reset"
+      type="button"
+      onclick="JavaScript: location.reload(true);"
+    >
+      Restart
+    </button>
+    <div class="win Hide"></div>
 
     <div class="menu">
-     <h1>Select the number of cells</h1>   
-    <input id="range1" type="range" min="3" max="20" value="8" oninput="this.nextElementSibling.value = this.value"/>
-    <output>8</output>
-    <br/>
-    <h1>Select how many in a row to win</h1> 
-    <input id="range2" type="range" min="3" max="10" value="5" oninput="this.nextElementSibling.value = this.value"/>
-    <output>5</output>
-    <br/>
-    <h1>Select a symbol for the player</h1>
-    <div class="inputy">
-    <input class="hrac1" type="text" value="X" maxlength="1" /> <br/> <br/>
-    <input class="hrac2" type="text" value="O" maxlength="1" />
+      <h1>Select the number of cells</h1>
+      <input
+        id="range1"
+        type="range"
+        min="3"
+        max="20"
+        value="8"
+        oninput="this.nextElementSibling.value = this.value"
+      />
+      <output>8</output>
+      <br />
+      <h1>Select how many in a row to win</h1>
+      <input
+        id="range2"
+        type="range"
+        min="3"
+        max="10"
+        value="5"
+        oninput="this.nextElementSibling.value = this.value"
+      />
+      <output>5</output>
+      <br />
+      <h1>Select a symbol for the player</h1>
+      <div class="inputy">
+        <input class="hrac1" type="text" value="X" maxlength="1" /> <br />
+        <br />
+        <input class="hrac2" type="text" value="O" maxlength="1" />
+      </div>
+      <br /><br />
+      <button onclick="kontrolaPridaniHrace()">Start Game</button>
+      <button onclick="pridaniHrace()">Add Player</button>
     </div>
-    <br/><br>
-    <button onclick="kontrolaPridaniHrace()">Start Game</button>
-    <button onclick="pridaniHrace()">Add Player</button>
-    </div>
- 
-</body>
-
+  </body>
 </html>

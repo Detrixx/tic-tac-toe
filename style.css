@@ -19,6 +19,7 @@ body {
     display: none;
 }
 
+
 [class*=radek] {
     border: 2px solid black;
     width: 90px;
@@ -34,6 +35,11 @@ button{
 }
 #reset{
     position: absolute;
+}
+.win{
+    font-size: 60px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: red;
 }
 
 .Hide{

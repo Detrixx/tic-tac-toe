@@ -10,7 +10,9 @@ let vyhra = false;
 let kolikrat;
 let pocetHracu =2;
 let kontrolaPoctuHracu =1;
+let remiza=0;
 const BtReset = document.getElementById("reset");
+const TextWin = document.querySelector(".win");
 
 BtReset.className = "Hide";
 board.className = "Hide";
@@ -22,6 +24,7 @@ function zacatekHry(){
     menu.className = "Hide";
     BtReset.className = "button";
     board.className = "board";
+    TextWin.className = "win";
     vytvoreniPole();
 
 }
@@ -95,8 +98,12 @@ function kontrolaVyhry() {
     let znak = pole[_x][_y];
     kolikrat = 1;
 
+    
     pole.forEach((element, poziceSloupce) => {
         element.forEach((element, poziceRadku) => {
+            if(JSON.stringify(element)===JSON.stringify([" "])){
+                remiza++;
+            }
             //console.log(`pozice ${element} je ${poziceSloupce},${poziceRadku}`);
             if (element == znak&& kolikrat!=naKolikViteznych) {
                 //diagonála
@@ -117,9 +124,15 @@ function kontrolaVyhry() {
             }
         });
     });
-    if (vyhra) {
-        alert(znak+" won!");
+    if(remiza===0){
+        TextWin.textContent = "Draw!";
     }
+    remiza=0;
+    
+    if (vyhra) {
+        TextWin.textContent = znak+" won!";
+    }
+    
 }
 
 function kontrolaOkolnichBunek(_poziceSloupce, _poziceRadku, _znak, _kolikrat, smerX, smerY) {
